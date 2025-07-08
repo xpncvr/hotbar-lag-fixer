@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "hotbarlagfixer",
+	"version": "${version}",
+	"name": "Hotbar lag fixer",
+	"description": "This mod fixes the brief freeze of your game when saving to a large hotbar file",
+	"authors": [
+		"xpncvr"
+	],
+	"contact": {
+		"homepage": "https://github.com/xpncvr/hotbar-lag-fixer",
+		"sources": "https://github.com/xpncvr/hotbar-lag-fixer"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/hotbarlagfixer/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"hotbar.lag.fixer.Main"
+		]
+	},
+	"mixins": [
+		"hotbarlagfixer.mixins.json",
+		{
+			"config": "hotbarlagfixer.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"minecraft": "~1.21.4",
+		"java": ">=21"
+	}
+}
