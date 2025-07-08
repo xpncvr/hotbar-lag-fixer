@@ -1,5 +1,6 @@
 # Hotbar lag fixer
 This mod fixes the brief freeze of your game when saving to a large hotbar file
+
 It runs the save asnyc
 
 ## Download
