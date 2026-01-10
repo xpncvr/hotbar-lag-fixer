@@ -13,21 +13,11 @@
 	},
 	"license": "GPL-3.0",
 	"icon": "assets/hotbarlagfixer/icon.png",
-	"environment": "client",
-	"entrypoints": {
-		"client": [
-			"hotbar.lag.fixer.Main"
-		]
-	},
 	"mixins": [
-		"hotbarlagfixer.mixins.json",
-		{
-			"config": "hotbarlagfixer.client.mixins.json",
-			"environment": "client"
-		}
+		"hotbarlagfixer.mixins.json"
 	],
 	"depends": {
-		"minecraft": "~1.21.4",
+		"minecraft": "~1.21.10",
 		"java": ">=21"
 	}
 }
