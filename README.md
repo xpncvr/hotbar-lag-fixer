@@ -1,11 +1,13 @@
-# Hotbar lag fixer
-This mod fixes the brief freeze of your game when saving to a large hotbar file. It is useful if you frequently save large items and find the 2-3 second freeze up of your game annoying.
+# Async hotbars
 
-It runs the save asnyc
+Hotbar Lag Fixer is a lightweight client-side mod that reduces lag caused by hotbar and inventory updates.
+
+Some players experience stuttering or short freezes when scrolling through or opening the hotbar.
+
+This mod improves how hotbar updates are handled on the client, reducing unnecessary processing and making item switching feel smoother and more responsive.
 
 ## Download
 https://modrinth.com/mod/hotbar-lag-fixer/
 
 ## License
-
 This project is under the GNU General Public License v3.0
