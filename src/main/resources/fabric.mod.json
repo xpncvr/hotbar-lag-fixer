@@ -3,7 +3,7 @@
 	"id": "hotbarlagfixer",
 	"version": "${version}",
 	"name": "Hotbar lag fixer",
-	"description": "This mod fixes the brief freeze of your game when saving to a large hotbar file",
+	"description": "This mod fixes the brief freeze of your game when saving to or loading a large hotbar file",
 	"authors": [
 		"xpncvr"
 	],
@@ -17,7 +17,7 @@
 		"hotbarlagfixer.mixins.json"
 	],
 	"depends": {
-		"minecraft": "~1.21.10",
-		"java": ">=21"
+		"minecraft": "~26.1",
+		"java": ">=25"
 	}
 }
