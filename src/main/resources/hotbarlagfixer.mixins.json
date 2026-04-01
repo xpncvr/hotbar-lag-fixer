@@ -1,9 +1,9 @@
 {
 	"required": true,
 	"package": "hotbar.lag.fixer.mixin",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"HotbarStorageMixin"
+		"HotbarManagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
