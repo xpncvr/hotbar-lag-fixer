@@ -4,8 +4,8 @@ import com.mojang.datafixers.DataFixer;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.DataResult;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.minecraft.client.option.HotbarStorage;
-import net.minecraft.client.option.HotbarStorageEntry;
+import net.minecraft.client.HotbarManager;
+import net.minecraft.client.player.inventory.Hotbar;
 import net.minecraft.nbt.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,19 +17,19 @@ import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 
-@Mixin(HotbarStorage.class)
-public abstract class HotbarStorageMixin {
-	@Shadow private HotbarStorageEntry[] entries;
-	@Shadow private Path file;
+@Mixin(HotbarManager.class)
+public abstract class HotbarManagerMixin {
+	@Shadow private Hotbar[] hotbars;
+	@Shadow private Path optionsFile;
 
     @Shadow private boolean loaded;
-    @Shadow private DataFixer dataFixer;
+    @Shadow private DataFixer fixerUpper;
 
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void preload(Path directory, DataFixer dataFixer, CallbackInfo ci) {
         ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
-            client.getCreativeHotbarStorage().getSavedHotbar(0);
+            client.getHotbarManager().get(0);
         });
     }
 
@@ -38,15 +38,15 @@ public abstract class HotbarStorageMixin {
 		ci.cancel();
 		CompletableFuture.runAsync(() -> {
 			try {
-				NbtCompound nbtCompound = NbtHelper.putDataVersion(new NbtCompound());
+				CompoundTag nbtCompound = NbtUtils.addCurrentDataVersion(new CompoundTag());
 
 				for (int i = 0; i < 9; ++i) {
-					HotbarStorageEntry entry = this.entries[i];
-					DataResult<NbtElement> result = HotbarStorageEntry.CODEC.encodeStart(NbtOps.INSTANCE, entry);
+					Hotbar entry = this.hotbars[i];
+					DataResult<Tag> result = Hotbar.CODEC.encodeStart(NbtOps.INSTANCE, entry);
 					nbtCompound.put(String.valueOf(i), result.getOrThrow());
 				}
 
-				NbtIo.write(nbtCompound, this.file);
+				NbtIo.write(nbtCompound, this.optionsFile);
 			} catch (Exception e) {
 				LogUtils.getLogger().error("Async hotbar save failed", e);
 			}
@@ -54,4 +54,3 @@ public abstract class HotbarStorageMixin {
 	}
 
 }
-
